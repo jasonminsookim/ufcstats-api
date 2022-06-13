@@ -33,7 +33,8 @@
 				"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
 				"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
 				"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
-				"python.linting.pylintPath": "/opt/venv/bin/python"
+				"python.linting.pylintPath": "/opt/venv/bin/python",
+				"python.pythonPath": "/workspaces/ufcstats-api/src"
 			},	
 			
 			// Add the IDs of extensions you want installed when the container is created.
