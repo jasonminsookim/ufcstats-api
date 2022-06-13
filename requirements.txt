@@ -4,3 +4,4 @@ SQLAlchemy == 1.4.37
 pandas == 1.4.2
 fastapi[all]
 python-dotenv == 0.20.0
+gunicorn == 20.1.0
