@@ -2,6 +2,8 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class Event(BaseModel):
+    event_name: str
+    event_date: datetime
     event_url: str
     datetime_scraped: datetime
 
