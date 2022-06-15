@@ -4,7 +4,17 @@ import crud, models, schemas
 from database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
-app = FastAPI()
+
+DESCRIPTION = """
+## Data Source / Web Scraping
+**Repo:** https://github.com/jasonminsookim/scrape_ufcstats
+**Deployed:** Scheduled to run every Monday with Google Cloud Run
+**Database:** Heroku Postgres
+
+## UFC Stats API
+**Repo:** https://github.com/jasonminsookim/ufcstats-api
+"""
+app = FastAPI(title="UFC Stats API", description=DESCRIPTION)
 
 @app.middleware("http")
 async def db_session_middleware(request: Request, call_next):

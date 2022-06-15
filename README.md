@@ -5,9 +5,10 @@
 ## Roadmap:
 
 Events:
-- [x] url
-- [ ] date
-- [ ] location
+- [x] name
+- [x] date
+- [x] location
+- [x] datetime scraped
 
 Fights:
 - [ ] outcome (win, loss, draw)
