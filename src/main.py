@@ -7,12 +7,12 @@ models.Base.metadata.create_all(bind=engine)
 
 DESCRIPTION = """
 ## Data Source / Web Scraping
-**Repo:** https://github.com/jasonminsookim/scrape_ufcstats
-**Deployed:** Scheduled to run every Monday with Google Cloud Run
-**Database:** Heroku Postgres
+- **Repo:** https://github.com/jasonminsookim/scrape_ufcstats
+- **Deployed:** Scheduled to run every Monday with Google Cloud Run
+- **Database:** Heroku Postgres
 
 ## UFC Stats API
-**Repo:** https://github.com/jasonminsookim/ufcstats-api
+- **Repo:** https://github.com/jasonminsookim/ufcstats-api
 """
 app = FastAPI(title="UFC Stats API", description=DESCRIPTION)
 
