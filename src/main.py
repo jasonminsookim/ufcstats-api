@@ -14,7 +14,11 @@ DESCRIPTION = """
 ## UFC Stats API
 - **Repo:** https://github.com/jasonminsookim/ufcstats-api
 """
-app = FastAPI(title="UFC Stats API", description=DESCRIPTION)
+
+TAGS_METADATA = [{"name": "events", 
+"description": "The metadata related to UFC events."}]
+
+app = FastAPI(title="UFC Stats API", description=DESCRIPTION, openapi_tags=TAGS_METADATA)
 
 @app.middleware("http")
 async def db_session_middleware(request: Request, call_next):
@@ -35,12 +39,14 @@ def get_db():
         db.close()
 
 
-@app.get("/events", response_model=list[schemas.Event])
+@app.get("/events", response_model=list[schemas.Event], tags=["events"])
 async def read_events(skip: int=0, limit: int= 100, db: Session = Depends(get_db)):
     events = crud.get_events(db, skip=skip, limit=limit)
     return events
 
 
-@app.get("/events/{event_id}")
-async def read_event(event_id: str):
-    return {"event": f"Placeholder event information for {event_id}"}
+@app.get("/events/{event_name}", response_model=schemas.Event, tags=["events"])
+async def get_event_by_name(event_name: str, db: Session = Depends(get_db)):
+    event = crud.get_event_by_name(db, event_name)
+    return event
+
