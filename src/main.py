@@ -15,10 +15,18 @@ DESCRIPTION = """
 - **Repo:** https://github.com/jasonminsookim/ufcstats-api
 """
 
-TAGS_METADATA = [{"name": "events", 
-"description": "The metadata related to UFC events."}]
+TAGS_METADATA = [
+    {"name": "events", "description": "The metadata related to UFC events."},
+    {
+        "name": "fights",
+        "description": "Fighter details, referee metadata, and stoppage metadata.",
+    },
+]
 
-app = FastAPI(title="UFC Stats API", description=DESCRIPTION, openapi_tags=TAGS_METADATA)
+app = FastAPI(
+    title="UFC Stats API", description=DESCRIPTION, openapi_tags=TAGS_METADATA
+)
+
 
 @app.middleware("http")
 async def db_session_middleware(request: Request, call_next):
@@ -29,7 +37,8 @@ async def db_session_middleware(request: Request, call_next):
     finally:
         request.state.db.close()
     return response
-    
+
+
 # Dependency
 def get_db():
     db = SessionLocal()
@@ -39,8 +48,8 @@ def get_db():
         db.close()
 
 
-@app.get("/events", response_model=list[schemas.Event], tags=["events"])
-async def read_events(skip: int=0, limit: int= 100, db: Session = Depends(get_db)):
+@app.get("/events/", response_model=list[schemas.Event], tags=["events"])
+async def read_events(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     events = crud.get_events(db, skip=skip, limit=limit)
     return events
 
@@ -50,3 +59,8 @@ async def get_event_by_name(event_name: str, db: Session = Depends(get_db)):
     event = crud.get_event_by_name(db, event_name)
     return event
 
+
+@app.get("/fights/", response_model=list[schemas.Fight], tags=["fights"])
+async def read_fights(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    fights = crud.get_fights(db, skip=skip, limit=limit)
+    return fights
