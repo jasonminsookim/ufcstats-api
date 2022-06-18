@@ -1,4 +1,5 @@
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
+from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 import crud, models, schemas
 from database import SessionLocal, engine
@@ -46,6 +47,11 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+@app.get("/")
+async def docs_redirect():
+    return RedirectResponse(url="/docs")
 
 
 @app.get("/events/", response_model=list[schemas.Event], tags=["events"])
