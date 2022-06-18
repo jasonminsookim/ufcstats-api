@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
-from typing import (Optional)
+from typing import Optional
 
 
 class Event(BaseModel):
@@ -32,8 +32,13 @@ class Fight(BaseModel):
     win_method: str
     win_method_details: Optional[str] = Field(None)
     referee: Optional[str] = Field(None)
-    end_round: Optional[int] = Field(None, description="The round number the fight ended in.")
-    end_second: Optional[int] = Field(None, description="The number of seconds into the round, in which the fight ended.")
+    end_round: Optional[int] = Field(
+        None, description="The round number the fight ended in."
+    )
+    end_second: Optional[int] = Field(
+        None,
+        description="The number of seconds into the round, in which the fight ended.",
+    )
     fight_url: str
     event_url: str
 
