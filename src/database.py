@@ -8,7 +8,7 @@ load_dotenv()
 
 
 engine = create_engine(
-    os.getenv("POSTGRES_DB_URL")
+    os.getenv("POSTGRES_DB_URL"), pool_pre_ping=True
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
