@@ -2,29 +2,29 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
 
+
 class Event(BaseModel):
-    index: int
     event_name: str
     event_date: datetime
     event_location: str
     event_url: str
-
 
     class Config:
         orm_mode = True
 
         schema_extra = {
             "example": {
-                "event_name": "UFC 275: Teixeira vs. Prochazka",
-                "event_date": "2022-06-11T00:00:00",
-                "event_location": "Kallang, Singapore",
-                "event_url": "http://www.ufcstats.com/event-details/3a24769a4855040a",
-                "datetime_scraped": "2022-06-15T00:22:08.534576",
+                "event_name": "UFC Fight Night: Kattar vs. Emmett",
+                "event_date": "2022-06-18T00:00:00",
+                "event_location": "Austin, Texas, USA",
+                "event_url": "http://www.ufcstats.com/event-details/a0a680fe2f6cc8e6",
             }
         }
 
+
+
 class Fight(BaseModel):
-    index: int
+    fight_url: str
     fighter1_name: str
     fighter2_name: str
     winner: str
@@ -39,22 +39,52 @@ class Fight(BaseModel):
         None,
         description="The number of seconds into the round, in which the fight ended.",
     )
-    event: Event
 
+    # Figher 1: Overall Stats
+    f1_total_knockdown: int
+    f1_total_sigstrikes_l: int
+    f1_total_sigstrikes_a: int
+    f1_total_strikes_l: int
+    f1_total_strikes_a: int
+    f1_total_takedown_l: int
+    f1_total_takedown_a: int
+    f1_total_submission_a: int
+    f1_total_pass: int
+    f1_total_reversal: int
+
+    # Fighter 2: Overall Stats
+    f2_total_knockdown: int
+    f2_total_sigstrikes_l: int
+    f2_total_sigstrikes_a: int
+    f2_total_strikes_l: int
+    f2_total_strikes_a: int
+    f2_total_takedown_l: int
+    f2_total_takedown_a: int
+    f2_total_submission_a: int
+    f2_total_pass: int
+    f2_total_reversal: int
+
+
+    event: Event
+    
     class Config:
         orm_mode = True
         schema_extra = {
             "example": {
-                "fighter1_name": "Alexander Volkanovski",
-                "fighter2_name": "Chan Sung Jung",
-                "winner": "Alexander Volkanovski",
-                "division": "UFC Featherweight Title Bout",
-                "win_method": "KO/TKO",
-                "win_method_details": "Punches to Head At Distance ",
-                "referee": "Herb Dean",
-                "end_round": 4,
-                "end_second": 45,
-                "fight_url": "http://www.ufcstats.com/fight-details/dc0ab34f1952cb48",
-                "event_url": "http://www.ufcstats.com/event-details/3a97fda0de6f1fa4",
+                "fighter1_name": "Joaquin Buckley",
+                "fighter2_name": "Albert Duraev",
+                "winner": "Joaquin Buckley",
+                "division": "Middleweight Bout",
+                "win_method": "TKO - Doctor's Stoppage",
+                "win_method_details": " ",
+                "referee": "Jacob Montalvo",
+                "end_round": 2,
+                "end_second": 300,
+                "event": {
+                    "event_name": "UFC Fight Night: Kattar vs. Emmett",
+                    "event_date": "2022-06-18T00:00:00",
+                    "event_location": "Austin, Texas, USA",
+                    "event_url": "http://www.ufcstats.com/event-details/a0a680fe2f6cc8e6",
+                },
             }
         }

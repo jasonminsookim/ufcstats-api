@@ -55,8 +55,15 @@ async def docs_redirect():
 
 
 @app.get("/events/", response_model=list[schemas.Event], tags=["events"])
-async def read_events(skip: int = 0, limit: int = 100, date_descending: bool = True, db: Session = Depends(get_db)):
-    events = crud.get_events(db, skip=skip, limit=limit, date_descending=date_descending)
+async def read_events(
+    skip: int = 0,
+    limit: int = 100,
+    date_descending: bool = True,
+    db: Session = Depends(get_db),
+):
+    events = crud.get_events(
+        db, skip=skip, limit=limit, date_descending=date_descending
+    )
     return events
 
 
@@ -67,6 +74,16 @@ async def get_event_by_name(event_name: str, db: Session = Depends(get_db)):
 
 
 @app.get("/fights/", response_model=list[schemas.Fight], tags=["fights"])
-async def read_fights(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    fights = crud.get_fights(db, skip=skip, limit=limit)
+async def read_fights(
+    skip: int = 0,
+    limit: int = 100,
+    date_descending: bool = True,
+    db: Session = Depends(get_db),
+):
+    fights = crud.get_fights(
+        db,
+        skip=skip,
+        limit=limit,
+        date_descending=date_descending,
+    )
     return fights

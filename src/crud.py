@@ -31,4 +31,7 @@ def get_event_by_name(db: Session, event_name: str):
 def get_fights(
     db: Session, skip: int = 0, limit: int = 100, date_descending: bool = True
 ):
-    return db.query(models.Fight).offset(skip).limit(limit).all()
+    if date_descending:
+        return db.query(models.Fight).order_by(desc(models.Fight.event_date)).offset(skip).limit(limit).all()
+    else:
+        return db.query(models.Fight).order_by(models.Fight.event_date).offset(skip).limit(limit).all()
