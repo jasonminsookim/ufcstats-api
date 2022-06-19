@@ -2,13 +2,13 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
 
-
 class Event(BaseModel):
+    index: int
     event_name: str
     event_date: datetime
     event_location: str
     event_url: str
-    datetime_scraped: datetime
+
 
     class Config:
         orm_mode = True
@@ -23,8 +23,8 @@ class Event(BaseModel):
             }
         }
 
-
 class Fight(BaseModel):
+    index: int
     fighter1_name: str
     fighter2_name: str
     winner: str
@@ -39,8 +39,7 @@ class Fight(BaseModel):
         None,
         description="The number of seconds into the round, in which the fight ended.",
     )
-    fight_url: str
-    event_url: str
+    event: Event
 
     class Config:
         orm_mode = True

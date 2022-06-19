@@ -4,15 +4,15 @@ from database import Base
 
 class Event(Base):
     __tablename__ = "events"
+    index = Column(Integer, primary_key=True, index=True)
     event_name = Column(String, index=True)
     event_date = Column(DateTime, index=True)
     event_location = Column(String, index=True)
-    event_url = Column(String, index=True, primary_key=True)
-    datetime_scraped = Column(DateTime, index=True)
-
+    event_url = Column(String, index=True)
 
 class Fight(Base):
     __tablename__ = "fights"
+    index = Column(Integer, primary_key=True, index=True)
     fighter1_name = Column(String, index=True)
     fighter2_name = Column(String, index=True)
     winner = Column(String, index=True)
@@ -22,5 +22,5 @@ class Fight(Base):
     referee = Column(String, index=True)
     end_round = Column(Integer, index=True)
     end_second = Column(Integer, index=True)
-    fight_url = Column(String, index=True)
-    event_url = Column(String, index=True, primary_key=True)
+    event_url = Column(String, ForeignKey("events.event_url"))
+    event = relationship("Event", backref="events")
