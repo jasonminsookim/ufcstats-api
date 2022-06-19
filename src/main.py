@@ -20,7 +20,7 @@ TAGS_METADATA = [
     {"name": "events", "description": "The metadata related to UFC events."},
     {
         "name": "fights",
-        "description": "Fighter details, referee metadata, and stoppage metadata.",
+        "description": "Fighter details, referee metadata, stoppage metadata, and fight stats {f1: fighter1, f2: fighter2, l: landed, a: attempted}",
     },
 ]
 
