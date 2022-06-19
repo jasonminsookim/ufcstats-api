@@ -22,7 +22,6 @@ class Event(BaseModel):
         }
 
 
-
 class Fight(BaseModel):
     fight_url: str
     fighter1_name: str
@@ -64,22 +63,42 @@ class Fight(BaseModel):
     f2_total_pass: int
     f2_total_reversal: int
 
-
     event: Event
-    
+
     class Config:
         orm_mode = True
         schema_extra = {
             "example": {
-                "fighter1_name": "Joaquin Buckley",
-                "fighter2_name": "Albert Duraev",
-                "winner": "Joaquin Buckley",
-                "division": "Middleweight Bout",
-                "win_method": "TKO - Doctor's Stoppage",
-                "win_method_details": " ",
-                "referee": "Jacob Montalvo",
-                "end_round": 2,
-                "end_second": 300,
+                "fight_url": "http://www.ufcstats.com/fight-details/9a92d376fba2379d",
+                "fighter1_name": "Court McGee",
+                "fighter2_name": "Jeremiah Wells",
+                "winner": "Jeremiah Wells",
+                "division": "Welterweight Bout",
+                "win_method": "KO/TKO",
+                "win_method_details": "Punch to Head At Distance ",
+                "referee": "Herb Dean",
+                "end_round": 1,
+                "end_second": 94,
+                "f1_total_knockdown": 0,
+                "f1_total_sigstrikes_l": 3,
+                "f1_total_sigstrikes_a": 8,
+                "f1_total_strikes_l": 3,
+                "f1_total_strikes_a": 8,
+                "f1_total_takedown_l": 0,
+                "f1_total_takedown_a": 0,
+                "f1_total_submission_a": 0,
+                "f1_total_pass": 0,
+                "f1_total_reversal": 0,
+                "f2_total_knockdown": 1,
+                "f2_total_sigstrikes_l": 7,
+                "f2_total_sigstrikes_a": 16,
+                "f2_total_strikes_l": 7,
+                "f2_total_strikes_a": 16,
+                "f2_total_takedown_l": 0,
+                "f2_total_takedown_a": 0,
+                "f2_total_submission_a": 0,
+                "f2_total_pass": 0,
+                "f2_total_reversal": 2,
                 "event": {
                     "event_name": "UFC Fight Night: Kattar vs. Emmett",
                     "event_date": "2022-06-18T00:00:00",
